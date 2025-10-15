@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title%}
+Register Page
+{% endblock  %}
+{% block content %}
+<div style="padding: 20px; text-align: center; color: red">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <b>{{ message }}</b>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+<form class="form" method="post" action="/do-signup">
+    <p class="title">Register </p>
+    <p class="message">Signup now and get full access to our app. </p>
+        <div class="flex">
+        <label>
+            <input name ="username"  placeholder="Username" type="text" class="input">
+           
+        </label>
+    </div>  
+            
+    <label>
+        <input name ="email"  placeholder="Email" type="email" class="input">
+      
+    </label> 
+        
+    <label>
+        <input name ="phone"  placeholder="Phone Number" type="phone" class="input">
+   
+    </label> 
+
+    <label>
+        <input name ="password"  placeholder="Password" type="password" class="input">
+ 
+    </label>
+    <label>
+        <input  name ="confirmpassword" placeholder="Confirmpassword" type="password" class="input" >
+       
+    </label>
+    <button class="submit">Submit</button>
+    <p class="signin">Already have an acount ? <a href="{{url_for('login_page')}}
+        ">Login</a> </p>
+</form>
+
+{% endblock %}

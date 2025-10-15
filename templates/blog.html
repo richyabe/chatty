@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}
+Blog Page
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0">Create a New Blog Post</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('create_blog') }}">
+                        <div class="form-group">
+                            <label for="title" class="font-weight-bold">Title:</label>
+                            <input type="text" name="title" class="form-control" placeholder="Enter your blog title" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description" class="font-weight-bold">Description:</label>
+                            <textarea name="description" class="form-control" rows="5" placeholder="Write your blog content here..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Create Blog</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}

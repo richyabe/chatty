@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="profile-container">
+    <h2 class="mt-4">Profile</h2>
+    <div class="profile-card">
+        <h3>{{ current_user.username }}</h3>  <!-- ✅ Changed 'user' to 'current_user' -->
+        <p>Email: {{ current_user.email }}</p>
+        <p>Member Since: {{ current_user.created.strftime('%B %d, %Y') }}</p>
+        <p><strong>Total Posts:</strong> {{ post_count }}</p>  <!-- ✅ Display Post Count -->
+        <a href="{{ url_for('settings') }}" class="btn btn-primary">Edit Profile</a>
+    </div>
+</div>
+{% endblock %}
