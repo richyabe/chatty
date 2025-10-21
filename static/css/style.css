@@ -21,6 +21,7 @@
   --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.12);
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   --transition-fast: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 * {
@@ -47,6 +48,7 @@ body {
   background-position: center;
   position: relative;
   overflow-x: hidden;
+  animation: fadeIn 0.5s ease-out;
 }
 
 /* Background Pattern */
@@ -60,6 +62,7 @@ body::before {
   background-image: radial-gradient(circle at 10% 20%, rgba(102, 126, 234, 0.05) 0%, transparent 20%),
                     radial-gradient(circle at 90% 80%, rgba(118, 75, 162, 0.05) 0%, transparent 20%);
   z-index: -1;
+  animation: float 15s ease-in-out infinite;
 }
 
 /* Layout Container */
@@ -86,6 +89,7 @@ h1 {
   margin: 30px 0;
   font-weight: 800;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  animation: slideInDown 0.8s ease-out;
 }
 
 h2 {
@@ -95,6 +99,7 @@ h2 {
   color: var(--dark);
   position: relative;
   padding-bottom: 0.5rem;
+  animation: slideInLeft 0.6s ease-out;
 }
 
 h2::after {
@@ -106,6 +111,7 @@ h2::after {
   height: 4px;
   background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
   border-radius: 2px;
+  animation: grow 0.5s ease-out forwards;
 }
 
 /* Links */
@@ -113,11 +119,28 @@ a {
   text-decoration: none;
   color: var(--primary);
   transition: var(--transition);
+  position: relative;
+  display: inline-block;
 }
 
 a:hover {
   color: var(--primary-dark);
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+a:hover::after {
+  width: 100%;
 }
 
 /* Buttons */
@@ -135,12 +158,32 @@ a:hover {
   cursor: pointer;
   font-size: 1rem;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+  z-index: -1;
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  animation: pulse 2s infinite;
 }
 
 .btn-primary:hover {
@@ -198,6 +241,7 @@ a:hover {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
   width: 100%;
   font-size: 1rem;
+  animation: fadeIn 0.3s ease-out;
 }
 
 .form-control:focus {
@@ -216,6 +260,8 @@ a:hover {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
 }
 
 .card:hover {
@@ -230,6 +276,7 @@ a:hover {
   color: white !important;
   font-weight: 600;
   padding: 1.25rem 1.5rem;
+  animation: slideInLeft 0.6s ease-out;
 }
 
 .card-body {
@@ -251,6 +298,7 @@ a:hover {
   overflow: hidden;
   transition: var(--transition);
   z-index: 1;
+  animation: slideInUp 0.8s ease-out;
 }
 
 .form-container:hover {
@@ -266,6 +314,7 @@ a:hover {
   height: 4px;
   background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
   z-index: 2;
+  animation: progress 2s linear infinite;
 }
 
 /* Form Title */
@@ -281,16 +330,19 @@ a:hover {
   align-items: center;
   justify-content: center;
   gap: 12px;
+  animation: bounceIn 0.8s ease-out;
 }
 
 .title::before {
   content: '📝';
   font-size: 24px;
+  animation: pulse 1.5s infinite;
 }
 
 /* Form Group */
 .form-group {
   margin-bottom: 24px;
+  animation: fadeIn 0.4s ease-out;
 }
 
 /* Input Fields */
@@ -306,6 +358,7 @@ a:hover {
   transition: var(--transition);
   border-color: var(--light-gray);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.3s ease-out;
 }
 
 .input:focus {
@@ -337,6 +390,7 @@ a:hover {
   justify-content: center;
   gap: 8px;
   width: 100%;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .submit::before,
@@ -349,6 +403,7 @@ a:hover {
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s;
+  z-index: -1;
 }
 
 .submit:hover::before,
@@ -375,6 +430,7 @@ a:hover {
   color: var(--gray);
   font-family: 'Inter', sans-serif;
   text-align: center;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .sign-up-link {
@@ -386,11 +442,29 @@ a:hover {
   font-weight: 600;
   font-family: 'Inter', sans-serif;
   transition: var(--transition);
+  position: relative;
+  display: inline-block;
+  padding: 0 4px;
 }
 
 .sign-up-link:hover {
   color: var(--primary-dark);
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+.sign-up-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.sign-up-link:hover::after {
+  width: 100%;
 }
 
 /* Social Login Buttons */
@@ -399,6 +473,7 @@ a:hover {
   flex-direction: column;
   gap: 16px;
   margin-top: 20px;
+  animation: fadeIn 0.6s ease-out;
 }
 
 .apple-login-button,
@@ -419,6 +494,7 @@ a:hover {
   background: white;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   width: 100%;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .apple-login-button:hover,
@@ -453,6 +529,27 @@ a:hover {
   display: flex;
   flex-direction: column;
   min-height: 250px;
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.blog-post.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.blog-post:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.blog-post:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.blog-post:nth-child(3) {
+  animation-delay: 0.3s;
 }
 
 .blog-post:hover {
@@ -468,6 +565,7 @@ a:hover {
   right: 0;
   height: 3px;
   background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  animation: progress 2s linear infinite;
 }
 
 /* Blog Title */
@@ -479,6 +577,7 @@ a:hover {
   line-height: 1.3;
   font-family: 'Inter', sans-serif;
   flex-grow: 1;
+  animation: fadeIn 0.5s ease-out;
 }
 
 /* Blog Description */
@@ -488,6 +587,7 @@ a:hover {
   line-height: 1.7;
   margin-bottom: 20px;
   flex-grow: 1;
+  animation: fadeIn 0.5s ease-out;
 }
 
 /* Blog Meta */
@@ -502,6 +602,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 8px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 /* Blog Actions */
@@ -510,6 +611,7 @@ a:hover {
   gap: 12px;
   margin-top: 24px;
   flex-wrap: wrap;
+  animation: fadeIn 0.5s ease-out;
 }
 
 /* Action Buttons */
@@ -528,6 +630,7 @@ a:hover {
   gap: 6px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   min-width: 80px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .edit-link {
@@ -574,6 +677,7 @@ a:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   position: relative;
   overflow: hidden;
+  animation: slideInRight 0.4s ease-out;
 }
 
 .alert::before {
@@ -625,6 +729,7 @@ a:hover {
   margin: 20px 0;
   box-shadow: var(--box-shadow);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeIn 0.6s ease-out;
 }
 
 /* Navigation Bar */
@@ -638,6 +743,7 @@ a:hover {
   top: 0;
   z-index: 1000;
   transition: var(--transition);
+  animation: slideInDown 0.6s ease-out;
 }
 
 .navbar-brand {
@@ -648,6 +754,7 @@ a:hover {
   -webkit-text-fill-color: transparent;
   font-family: 'Inter', sans-serif;
   transition: var(--transition);
+  animation: fadeIn 0.5s ease-out;
 }
 
 .navbar-brand:hover {
@@ -663,6 +770,7 @@ a:hover {
   border-radius: var(--border-radius-sm);
   overflow: hidden;
   margin-top: 8px;
+  animation: fadeIn 0.3s ease-out;
 }
 
 .navbar .dropdown-menu a {
@@ -696,6 +804,7 @@ a:hover {
   max-width: 800px;
   margin: 40px auto;
   padding: 0 20px;
+  animation: fadeIn 0.6s ease-out;
 }
 
 .profile-card {
@@ -708,6 +817,7 @@ a:hover {
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: var(--transition);
   margin-bottom: 30px;
+  animation: fadeInUp 0.6s ease-out;
 }
 
 .profile-card:hover {
@@ -893,6 +1003,15 @@ a:hover {
 }
 
 /* Smooth Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -904,41 +1023,143 @@ a:hover {
   }
 }
 
-.blog-post {
-  animation: fadeInUp 0.6s ease-out;
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  border-radius: 4px;
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Footer */
-footer {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 30px 0;
-  margin-top: 40px;
-  text-align: center;
-  font-size: 14px;
-  color: var(--gray);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
-  margin-bottom: 0;
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+  }
+}
+
+@keyframes grow {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 60px;
+  }
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 /* Animation Delay for Blog Posts */
@@ -1062,4 +1283,47 @@ footer {
   height: 100%;
   background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
   border-radius: 4px;
+}
+
+/* Ensure links in forms have correct styling */
+.form-container a {
+  color: var(--primary);
+}
+
+.form-container a:hover {
+  color: var(--primary-dark);
+  text-decoration: none;
+}
+
+/* Ensure sign-up link in form has correct styling */
+.sign-up-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.sign-up-link:hover {
+  color: var(--primary-dark);
+  text-decoration: none;
+}
+
+/* Ensure nav links are styled correctly */
+.navbar-nav .nav-link {
+  color: var(--dark) !important;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--primary) !important;
+}
+
+/* Ensure dropdown items are styled properly */
+.navbar .dropdown-menu .dropdown-item {
+  color: var(--dark) !important;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white !important;
 }
