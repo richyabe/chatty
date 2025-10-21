@@ -755,6 +755,7 @@ a:hover::after {
   font-family: 'Inter', sans-serif;
   transition: var(--transition);
   animation: fadeIn 0.5s ease-out;
+  color: var(--dark) !important; /* Ensure brand text is visible */
 }
 
 .navbar-brand:hover {
@@ -777,7 +778,7 @@ a:hover::after {
   font-size: 14px;
   padding: 8px 16px;
   transition: var(--transition);
-  color: var(--dark);
+  color: var(--dark) !important; /* Ensure dropdown text is visible */
   display: flex;
   align-items: center;
   gap: 8px;
@@ -791,11 +792,26 @@ a:hover::after {
 
 .navbar .dropdown-item {
   transition: var(--transition);
+  color: var(--dark) !important; /* Ensure dropdown item text is visible */
 }
 
 .navbar .dropdown-item:hover {
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white !important;
+}
+
+/* Nav Links */
+.navbar-nav .nav-link {
+  color: var(--dark) !important; /* Ensure nav links are visible */
+  font-weight: 500;
+  transition: var(--transition);
+  padding: 0.5rem 1rem; /* Add padding for better click area */
+  border-radius: var(--border-radius-sm); /* Rounded corners */
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--primary) !important;
+  background-color: rgba(102, 126, 234, 0.1); /* Subtle hover effect */
 }
 
 /* Profile and Settings */
@@ -1306,24 +1322,4 @@ a:hover::after {
   color: var(--primary-dark);
   text-decoration: none;
 }
-
-/* Ensure nav links are styled correctly */
-.navbar-nav .nav-link {
-  color: var(--dark) !important;
-  font-weight: 500;
-  transition: var(--transition);
-}
-
-.navbar-nav .nav-link:hover {
-  color: var(--primary) !important;
-}
-
-/* Ensure dropdown items are styled properly */
-.navbar .dropdown-menu .dropdown-item {
-  color: var(--dark) !important;
-}
-
-.navbar .dropdown-menu .dropdown-item:hover {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  color: white !important;
-}
+```
